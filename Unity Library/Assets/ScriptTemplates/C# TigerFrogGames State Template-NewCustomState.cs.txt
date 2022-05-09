@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace TigerFrogGames
+{
+    public class #SCRIPTNAME# : IState
+    {
+        #region Variables
+
+        #endregion
+
+        #region State Methods
+
+        public #SCRIPTNAME#()
+        {
+            
+        }
+
+        public void Tick()
+        {
+            
+        }
+
+        public void OnEnter()
+        {
+            
+        }
+
+        public void OnExit()
+        {
+            
+        }
+
+        #endregion
+
+        #region Methods
+
+        #endregion
+    }
+}

@@ -41,7 +41,7 @@ namespace TigerFrogGames
         public void tick()
         {
             Transition transition = GetTransition();
-
+            
             if (transition != null) SetState(transition.To);
 
             currentState?.Tick();

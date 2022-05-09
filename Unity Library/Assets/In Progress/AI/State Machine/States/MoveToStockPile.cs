@@ -4,24 +4,22 @@ using UnityEngine;
 
 namespace TigerFrogGames
 {
-    public class SearchForResource : IState
+    public class MoveToStockPile : IState
     {
         #region Variables
 
-        private readonly Gatherer gatherer;
-
         #endregion
 
-        #region IState Methods
+        #region State Methods
 
-        public SearchForResource(Gatherer gathererIn)
+        public MoveToStockPile()
         {
-            gatherer = gathererIn;
+            
         }
 
         public void Tick()
         {
-            //gatherer.Target = Ch
+            
         }
 
         public void OnEnter()
@@ -37,8 +35,6 @@ namespace TigerFrogGames
         #endregion
 
         #region Methods
-
-
 
         #endregion
     }
