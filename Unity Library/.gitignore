@@ -9,9 +9,19 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/UserSettings/*
+
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
+
+# Asset Store Packages
+
+/[Aa]ssets/Gizmos/SensorToolkit/*
+/[Aa]ssets/SensorToolkit/*
+/[Aa]ssets/Gizmos.meta
+/[Aa]ssets/SensorToolKit.meta
+/[Aa]ssets/Gizmos/SensorToolKit.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
@@ -55,6 +65,6 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+
 # Crashlytics generated file
 crashlytics-build.properties
-
