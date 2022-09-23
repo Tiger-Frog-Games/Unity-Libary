@@ -8,7 +8,7 @@ namespace TigerFrogGames
     {
         #region Variables
 
-        [field: SerializeField] public List<CustomTagScriptableObject> Tags { get; private set; }
+        [field: SerializeField] public List<CustomTagScriptableObject> Tags {  get; private set; }
 
         #endregion
 
@@ -22,6 +22,42 @@ namespace TigerFrogGames
         {
             return Tags.Contains(t);
         }
+
+        public void AddTag(CustomTagScriptableObject t)
+        {
+            if (!Tags.Contains(t))
+            {
+                Tags.Add(t);
+            }
+            
+        }
+
+
+        public static bool HasTag(GameObject obj, CustomTagScriptableObject t)
+        {
+            return obj.TryGetComponent<CustomTag>(out var tags) && tags.HasTag(t);
+        }
+        
+        public bool RemoveTag(CustomTagScriptableObject t)
+        {
+            return Tags.Remove(t);
+        }
+        
+        #if UNITY_EDITOR
+
+        [ContextMenu("Print Tags")]
+        public void printTags()
+        {
+            string result = "Tags :";
+            foreach (var Tag in Tags)
+            {
+                result += " " + Tag.TagName;
+            }
+
+            print(result);
+        }
+        
+        #endif
         
         #endregion
     }

@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05cd1b54db7fecf489164d0cbbae8964, type: 3}
-  m_Name: Custom-Tag
+  m_Name: Blue
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: One
+  <Name>k__BackingField: 

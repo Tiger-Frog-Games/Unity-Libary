@@ -7,6 +7,6 @@ namespace TigerFrogGames
     [CreateAssetMenu(menuName = "Tag/CustomTag")]
     public class CustomTagScriptableObject : ScriptableObject
     {
-        [field: SerializeField] public string Name { get; private set; }
+        [field: SerializeField] public string TagName { get; private set; }
     }
 }
