@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TigerFrogGames
 {
-    public class OnClickPrintTags : MonoBehaviour
+    public class OnClickPrintTags : MonoBehaviour, IClickable
     {
         #region Variables
 
@@ -13,7 +13,7 @@ namespace TigerFrogGames
 
         #region Unity Methods
         
-        private void OnClick()
+        public void OnClick()
         {
             TryGetComponent<CustomTag>(out CustomTag tags);
             tags.printTags();

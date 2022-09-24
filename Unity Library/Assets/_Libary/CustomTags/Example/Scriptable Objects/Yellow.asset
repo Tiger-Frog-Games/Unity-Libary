@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cd1b54db7fecf489164d0cbbae8964, type: 3}
   m_Name: Yellow
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: 
+  <TagName>k__BackingField: Yellow
