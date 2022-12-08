@@ -1,0 +1,7 @@
+The unity editor checks to see if its a audio clip.
+
+Plays the clip instead of trying to open it audacity/default program. 
+
+Follows the tutorial here
+https://www.youtube.com/watch?v=Gd8M1Ychis8 
+
