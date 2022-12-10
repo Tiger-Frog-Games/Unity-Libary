@@ -15,6 +15,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/CustomTags/CustomTag.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/CustomTags/Example/OnClickPrintTags.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/EventChannelScriptableObjects/Scripts/Event Channels/EventChannelTimeSpan.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Libary/GameStatemanager/Helper/GameStateSetter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/In Game Time Manager/Version One/TimeManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/In Game Time Manager/Version Two/TimeManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/ListUtilities/TesterForList.cs" root0="FORCE_HIGHLIGHTING" />
@@ -87,7 +88,7 @@
       <workItem from="1670365663822" duration="626000" />
       <workItem from="1670438652148" duration="3666000" />
       <workItem from="1670484757818" duration="217000" />
-      <workItem from="1670522756965" duration="12838000" />
+      <workItem from="1670522756965" duration="13463000" />
     </task>
     <servers />
   </component>

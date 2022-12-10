@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TigerFrogGames
 {
-    public class OnAwakeSetGameState : MonoBehaviour
+    public class GameStateSetter : MonoBehaviour
     {
         #region Variables
         [SerializeField] private GameState startingState;
@@ -21,6 +21,18 @@ namespace TigerFrogGames
 
         #region Methods
 
+        [ContextMenu("Play Game")]
+        public void SetGameStateGameplay()
+        {
+            GameStateManager.Instance.SetState(GameState.Gameplay);
+        }
+        
+        [ContextMenu("Pause Game")]
+        public void SetGameStatePauses()
+        {
+            GameStateManager.Instance.SetState(GameState.Paused);
+        }
+        
         #endregion
     }
 }
