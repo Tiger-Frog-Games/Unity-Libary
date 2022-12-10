@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TigerFrogGames
+namespace TigerFrogGames.old
 {
     /// <summary>
     /// The point of this class is to run the game clock logic.
