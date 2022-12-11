@@ -89,12 +89,20 @@ namespace TigerFrogGames
                 OnTimerReset.OnEvent -= ResetTimer;
             }
         }
-        
+
+        private int _lastBroadcastedMin = -1;
         private void Update()
         {
             _currentTime += TimeSpan.FromMinutes( Time.deltaTime * _minLength  );
-            
-            OnTimeChange.RaiseEvent(_currentTime);
+
+            if (_currentTime.Minutes != _lastBroadcastedMin)
+            {
+                OnTimeChange.RaiseEvent(_currentTime);
+                _lastBroadcastedMin = _currentTime.Minutes;
+            }
+
+            //
+            //print($"{_currentTime.Days} - {_currentTime.Hours}:{_currentTime.Minutes}.{_currentTime.Seconds}"
             
             //print(_currentTime.ToString(@"d\.hh\:mm\:ss"));
         }
@@ -113,9 +121,14 @@ namespace TigerFrogGames
         [ContextMenu("Reset Timer")]
         private void ResetTimer()
         {
-            _currentTime = new TimeSpan(startDay,startHour,startMin,startHour);
+            setTime( startDay, startHour, startMin);
         }
 
+        private void setTime(int day,int hour, int minutes)
+        {
+            _currentTime = new TimeSpan(day,hour,minutes,0);
+        }
+        
         #endregion
 
         #region Editor
