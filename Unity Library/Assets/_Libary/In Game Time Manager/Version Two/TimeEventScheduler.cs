@@ -21,8 +21,9 @@ namespace TigerFrogGames
             public bool repeating = false;
             public int day = -1;
             public int hour;
-            public int min;
+            public int minutes;
             public UnityEvent eventActions;
+            
         }
         
         
@@ -51,7 +52,7 @@ namespace TigerFrogGames
                     s => 
                         (newTime.Days == s.day || s.day == -1 ) && 
                         newTime.Hours == s.hour &&
-                        newTime.Minutes == s.min);
+                        newTime.Minutes == s.minutes);
 
             if (schedule.Count != 0)
             {
@@ -64,9 +65,25 @@ namespace TigerFrogGames
                     }   
                 }
             }
-            
-            
         }
+
+        public void AddSchedualedEvent(UnityEvent eventAction, TimeSpan eventTime, bool isRepeating = false)
+        {
+            var timedEventTemp = new TimedEvent
+            {
+                day = eventTime.Days,
+                hour = eventTime.Hours,
+                minutes = eventTime.Minutes,
+                repeating = isRepeating,
+                eventActions = eventAction
+            };
+
+
+            schedualedEvents.Add(timedEventTemp);
+        }
+        
+        
+        
         /// <summary>
         /// Just a method to test printing at a time
         /// </summary>
@@ -74,6 +91,16 @@ namespace TigerFrogGames
         {
             print("ping");
         }
+
+        [ContextMenu("Test add event")]
+        public void testAddEvent()
+        {
+            var myEvent = new UnityEvent();
+            myEvent.AddListener(printPing);
+            
+            AddSchedualedEvent(myEvent,new TimeSpan(2,1,1,1));
+        }
+        
         
         #endregion
     }
