@@ -8,7 +8,9 @@ namespace TigerFrogGames
     {
         #region Variables
 
-        [SerializeField] private Dictionary<CustomTagStat, float> _stats;
+        private Dictionary<CustomTagStat, float> _baseStats;
+
+        private List<Buff> _TimedBuffs;
 
         #endregion
 
