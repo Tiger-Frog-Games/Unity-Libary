@@ -12,6 +12,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/823fb226a3f9439cb41fdcb61f9c86a1157600/2c/87a16429/Object.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../SplitSiege/Assets/Scripts/TowerPipeline/Individual Functionality/Behavior/Clocktower.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/CustomTags/CustomTag.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/CustomTags/Example/OnClickPrintTags.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/EventChannelScriptableObjects/Scripts/Event Channels/EventChannelTimeSpan.cs" root0="FORCE_HIGHLIGHTING" />
@@ -20,6 +21,10 @@
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/In Game Time Manager/Version Two/Liseners/TimerEventMultipleTexts.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/In Game Time Manager/Version Two/TimeManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/ListUtilities/TesterForList.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Libary/StatManager/Buff.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Libary/StatManager/CustomTagStat.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Libary/StatManager/Stat.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Libary/StatManager/StatBlock.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -91,7 +96,9 @@
       <workItem from="1670438652148" duration="3666000" />
       <workItem from="1670484757818" duration="217000" />
       <workItem from="1670522756965" duration="22482000" />
-      <workItem from="1670786543627" duration="3664000" />
+      <workItem from="1670786543627" duration="4037000" />
+      <workItem from="1671047068420" duration="331000" />
+      <workItem from="1671122151712" duration="3172000" />
     </task>
     <servers />
   </component>
