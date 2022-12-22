@@ -1,17 +1,19 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace TigerFrogGames
 {
-    [Serializable]
-    public class Buff 
+    public class StatusEffectExpirable : MonoBehaviour
     {
         #region Variables
 
         #endregion
-        
+
+        #region Unity Methods
+
+        #endregion
+
         #region Methods
 
         #endregion

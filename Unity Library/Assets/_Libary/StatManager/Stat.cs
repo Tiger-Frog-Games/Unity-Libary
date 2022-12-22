@@ -5,46 +5,49 @@ using UnityEngine;
 
 namespace TigerFrogGames
 {
-    [Serializable] 
-    public class Stat 
+    [Serializable]
+    public class Stat
     {
-        private float _min, _max,_base, _current,
-                    _minModifer,_maxModifer,_currentModifer;
-        
-        
-        public event Action<float,float> OnStatChange;
-        
-        public Stat(float min, float max,float current)
-        {
-            _min = min;
-            _max = max;
-            _current = current;
-        }
+        [field: SerializeField] public float Value { get; private set; }
 
-        public void changeCurrentValue(float valueIn)
-        {
-            _current = Mathf.Clamp(_current + valueIn, _min, _max);
-            OnStatChange?.Invoke(_current, _max);
-        }
+        //[SerializeField] private bool _useStatAsMax = false;
+        //[SerializeField] private Stat _maxStat;
 
         
-        /// <summary>
-        /// Changes the max stat value.
+        
+        public event Action<float> OnStatChange;
+
+
+        public Stat(float value)
+        {
+            Value = value;
+        }
+
+            /// <summary>
+        /// Changes the value of the stat value.
         /// If the value change would maker it 
         /// </summary>
-        /// <param name="valueIn"></param>
-        /// <param name="updateHp"></param>
-        public void changeMaxValue(float valueIn, bool updateCurrent = true)
+        /// <param name="valueIn">Value to</param>
+        public void ChangeValue(float valueIn)
         {
-            float temp = _max;
-            _max = Mathf.Max(_min, _max + valueIn);
-            
+            //Value = _useStatAsMax ? Mathf.Clamp(valueIn, 0, _maxStat.Value) : valueIn;
+            Value = valueIn;
+
+            OnStatChange?.Invoke(Value);
+        }
+        
+            /*
+        public void SetStatAsMax(Stat statIn)
+        {
+            _useStatAsMax = true;
+            _maxStat = statIn;
         }
 
-        public float getCurrent()
+        public void RemoveStatAsMax()
         {
-            return _current + _currentModifer;
+            _useStatAsMax = false;
         }
+        */
         
     }
 }
