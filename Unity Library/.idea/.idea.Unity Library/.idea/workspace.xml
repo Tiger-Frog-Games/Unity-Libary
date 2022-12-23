@@ -25,7 +25,9 @@
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/StatManager/Stat.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/StatManager/StatBlock.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/StatManager/StatBlockTester.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Libary/StatManager/StatusEffectConditionalStat.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/StatManager/StatusEffectDuration.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Libary/StatManager/StatusEffectInstant.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -100,6 +102,7 @@
       <workItem from="1670786543627" duration="4037000" />
       <workItem from="1671047068420" duration="331000" />
       <workItem from="1671122151712" duration="3172000" />
+      <workItem from="1671757897018" duration="7645000" />
     </task>
     <servers />
   </component>

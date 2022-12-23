@@ -22,7 +22,7 @@ namespace TigerFrogGames
         public void testAddingDurationStatOne()
         {
             test = OnDealDamage;
-            var temp = new StatusEffectDuration( stat, 0, .5f, test, .1f, 2 );
+            var temp = new StatusEffectDuration( true, test, 1.5f, .1f );
 
             print("Sanity Check");
             statBlock.AddStatusEffectDuration(temp);

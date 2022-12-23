@@ -9,17 +9,18 @@ namespace TigerFrogGames
     {
         #region Variables
         
-        public CustomTagStat StatToEffect { private set; get; }
-        public float Value { private set; get; }
-        
         #endregion
         
         #region Methods
 
-        public StatusEffect(CustomTagStat statToEffect, float value)
+        public StatusEffect()
         {
-            StatToEffect = statToEffect;
-            Value = value;
+            
+        }
+        
+        public virtual void OnAddEffect()
+        {
+            //OnEffectOverFromTime?.Invoke();
         }
         
         #endregion

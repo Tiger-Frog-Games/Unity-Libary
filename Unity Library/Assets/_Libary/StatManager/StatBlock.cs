@@ -19,14 +19,20 @@ namespace TigerFrogGames
         #region Variables
 
         [SerializeField] private List<statInfo> initializingStats;
-
+        private Dictionary<CustomTagStat, float> _baseStats = new();
+        
+        /// <summary>
+        /// Will always be upto date when a new condition is added/removoved
+        /// </summary>
         private Dictionary<CustomTagStat, Stat> _stats = new();
         
         #region Status Effects
 
         private List<StatusEffectDuration> _durational = new();
-        private List<StatusEffectConditional> _conditional = new ();
         
+        
+        private List<StatusEffectConditionalStat> _conditionalStat = new ();
+        private List<StatusEffectConditionalOnMethod> _conditionalOnMethod = new ();
 
         #endregion
 
@@ -49,6 +55,7 @@ namespace TigerFrogGames
             foreach (var v in initializingStats)
             {
                 AddStat(v.statType, v.statValue);
+                _baseStats.Add(v.statType,v.statValue);
             }
         }
 
@@ -58,7 +65,7 @@ namespace TigerFrogGames
             {
                 
                 if (_durational[i].RemoveTimeFromDuration(Time.deltaTime)) continue;
-                _durational[i].CallOnRemoveEffect();
+                _durational[i].OnEffectOver();
                 //_durational.RemoveAt(i);
             }
             
@@ -68,9 +75,9 @@ namespace TigerFrogGames
 
         #region Methods
 
-        public void AddStatusEffectInstant(StatusEffect newEffect)
+        public void AddStatusEffectInstant(StatusEffectInstant newEffect)
         {
-            AddStat(newEffect.StatToEffect, newEffect.Value);
+            
         }
 
         public void AddStatusEffectDuration(StatusEffectDuration newEffect)
@@ -78,9 +85,9 @@ namespace TigerFrogGames
             _durational.Add(newEffect);
         }
 
-        public void AddStatusEffectConditional(StatusEffectConditional newEffect)
+        public void AddStatusEffectConditional(StatusEffectConditionalStat newEffect)
         {
-            _conditional.Add(newEffect);
+            _conditionalStat.Add(newEffect);
         }
         
         public float GetStatValue(CustomTagStat statToGet)
@@ -90,9 +97,9 @@ namespace TigerFrogGames
                 float temp = 0;
                 
                 //Adds the stat effects from the conditional and durational effects. 
-                foreach (var effect1 in _durational.FindAll(effect => effect.StatToEffect == statToGet)) temp += effect1.Value;
+                foreach (var effect1 in _conditionalStat.FindAll(effect => effect.StatToEffect == statToGet)) temp += effect1.Value;
 
-                foreach (var effect1 in _conditional.FindAll(effect => effect.StatToEffect == statToGet)) temp += effect1.Value;
+                
                 
                 return value.Value + temp;
             }

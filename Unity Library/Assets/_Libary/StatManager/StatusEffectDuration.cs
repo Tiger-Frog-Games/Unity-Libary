@@ -17,8 +17,6 @@ namespace TigerFrogGames
 
         private float _durationLeft;
         
-        private float _durationResetValue;
-        
         private float _timeToAdd;
 
         public delegate void OnProcEvent();
@@ -36,13 +34,10 @@ namespace TigerFrogGames
 
         #endregion
 
-        public StatusEffectDuration(CustomTagStat statToEffect, float value, float duration, OnProcEvent onProcEvent ,float procCooldown = 0, float timeToAdd = 0) : base(statToEffect, value)
+        public StatusEffectDuration(bool isRemovedOnReset, OnProcEvent onProcEvent, float duration ,float procCooldown = 0) : base(isRemovedOnReset)
         {
             _durationLeft = duration;
-            _durationResetValue = duration;
 
-            _timeToAdd = timeToAdd;
-            
             _procMethod = onProcEvent;
 
             _procCooldownTime = procCooldown;
@@ -66,6 +61,8 @@ namespace TigerFrogGames
             
             return (_durationLeft > 0);
         }
+        
+
         
     }
 }

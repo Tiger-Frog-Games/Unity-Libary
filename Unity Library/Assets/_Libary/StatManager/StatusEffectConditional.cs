@@ -9,20 +9,23 @@ namespace TigerFrogGames
     {
         #region Variables
 
-        public event Action OnEffectOverFromTime;
+        private bool _isRemovedOnReset;
         
         #endregion
         
         #region Methods
 
-        public StatusEffectConditional(CustomTagStat statToEffect, float value) : base(statToEffect, value)
+        //todo accept an OnOver delaget
+        public StatusEffectConditional(bool isRemovedOnReset)
         {
+            _isRemovedOnReset = isRemovedOnReset;
         }
         
-        public void CallOnRemoveEffect()
+        public void OnEffectOver()
         {
-            OnEffectOverFromTime?.Invoke();
+            //OnEffectOver?.Invoke();
         }
+        
         
         #endregion
         
