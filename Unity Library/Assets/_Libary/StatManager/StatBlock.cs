@@ -61,9 +61,9 @@ namespace TigerFrogGames
             for (int i = _durational.Count - 1; i >= 0; i--)
             {
                 
-                if (_durational[i].RemoveTimeFromDuration(Time.deltaTime)) continue;
+                if (_durational[i].RemoveTimeFromDuration(Time.deltaTime )) continue;
                 _durational[i].OnEffectOver();
-                //_durational.RemoveAt(i);
+                _durational.RemoveAt(i);
             }
             
         }
@@ -77,7 +77,7 @@ namespace TigerFrogGames
             if (_stats.TryGetValue(newEffect.StatToEffect,out Stat foundStat))
             {
                 foundStat.ChangeValue(newEffect.Value);
-                print(_stats[newEffect.StatToEffect].Value);
+                
                 return;
             }
             _stats.Add(newEffect.StatToEffect,new Stat(newEffect.Value));

@@ -47,7 +47,7 @@ namespace TigerFrogGames
         public bool RemoveTimeFromDuration( float time )
         {
             _durationLeft -= time;
-
+            
             if (_procMethod != null)
             {
                 _procCurrentCoolDown += time;
