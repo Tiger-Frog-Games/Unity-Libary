@@ -22,7 +22,7 @@ namespace TigerFrogGames
         private Dictionary<CustomTagStat, float> _baseStats = new();
         
         /// <summary>
-        /// Will always be upto date when a new condition is added/removoved
+        /// Will always be upto date when a new condition is added/removed
         /// </summary>
         private Dictionary<CustomTagStat, Stat> _stats = new();
         
@@ -43,15 +43,7 @@ namespace TigerFrogGames
         private void Awake()
         {
             GameStateManager.Instance.OnGameStateChanged += GameStateManager_OnGameStateChanged;
-        }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= GameStateManager_OnGameStateChanged;
-        }
-        
-        public void Start()
-        {
+            
             foreach (var v in initializingStats)
             {
                 AddStat(v.statType, v.statValue);
@@ -59,6 +51,11 @@ namespace TigerFrogGames
             }
         }
 
+        private void OnDestroy()
+        {
+            GameStateManager.Instance.OnGameStateChanged -= GameStateManager_OnGameStateChanged;
+        }
+        
         private void Update()
         {
             for (int i = _durational.Count - 1; i >= 0; i--)
@@ -77,7 +74,13 @@ namespace TigerFrogGames
 
         public void AddStatusEffectInstant(StatusEffectInstant newEffect)
         {
-            
+            if (_stats.TryGetValue(newEffect.StatToEffect,out Stat foundStat))
+            {
+                foundStat.ChangeValue(newEffect.Value);
+                print(_stats[newEffect.StatToEffect].Value);
+                return;
+            }
+            _stats.Add(newEffect.StatToEffect,new Stat(newEffect.Value));
         }
 
         public void AddStatusEffectDuration(StatusEffectDuration newEffect)

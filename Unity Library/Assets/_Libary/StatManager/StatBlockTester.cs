@@ -13,6 +13,8 @@ namespace TigerFrogGames
 
         [SerializeField] private CustomTagStat stat;
         
+        [SerializeField] private CustomTagStat hp;
+        
         private StatusEffectDuration.OnProcEvent test;
         
         #endregion
@@ -28,9 +30,9 @@ namespace TigerFrogGames
             statBlock.AddStatusEffectDuration(temp);
         }
 
-        private void OnDealDamage()
+        public void OnDealDamage()
         {
-            print("moew to the mix");
+            statBlock.AddStatusEffectInstant(new StatusEffectInstant(hp, -1));
         }
         
         #endregion

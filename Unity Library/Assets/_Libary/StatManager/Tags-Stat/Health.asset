@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Health
   m_EditorClassIdentifier: 
   <TagName>k__BackingField: Health
+  <CanBeUsedAsInstantStatusEffect>k__BackingField: 1

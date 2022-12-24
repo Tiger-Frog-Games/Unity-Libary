@@ -12,8 +12,6 @@ namespace TigerFrogGames
 
         //[SerializeField] private bool _useStatAsMax = false;
         //[SerializeField] private Stat _maxStat;
-
-        
         
         public event Action<float> OnStatChange;
 
@@ -31,23 +29,18 @@ namespace TigerFrogGames
         public void ChangeValue(float valueIn)
         {
             //Value = _useStatAsMax ? Mathf.Clamp(valueIn, 0, _maxStat.Value) : valueIn;
+            Value += valueIn;
+
+            OnStatChange?.Invoke(Value);
+        }
+            
+        public void SetValue(float valueIn)
+        {
+            //Value = _useStatAsMax ? Mathf.Clamp(valueIn, 0, _maxStat.Value) : valueIn;
             Value = valueIn;
 
             OnStatChange?.Invoke(Value);
         }
-        
-            /*
-        public void SetStatAsMax(Stat statIn)
-        {
-            _useStatAsMax = true;
-            _maxStat = statIn;
-        }
-
-        public void RemoveStatAsMax()
-        {
-            _useStatAsMax = false;
-        }
-        */
-        
+            
     }
 }
