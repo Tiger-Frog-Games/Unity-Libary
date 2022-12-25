@@ -10,6 +10,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/_Libary/Basic Stat Block and Abailities/StatusEffects/StatusEffectInstant.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -104,6 +107,7 @@
       <workItem from="1671858935972" duration="1632000" />
       <workItem from="1671861024784" duration="99000" />
       <workItem from="1671861650997" duration="3070000" />
+      <workItem from="1671900391342" duration="1852000" />
     </task>
     <servers />
   </component>

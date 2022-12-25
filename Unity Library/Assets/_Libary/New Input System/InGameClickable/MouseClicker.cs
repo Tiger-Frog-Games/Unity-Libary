@@ -60,7 +60,7 @@ namespace TigerFrogGames
 
         private void MouseLeftClickOnperformed(InputAction.CallbackContext obj)
         {
-            print("Mouse has been left clicked");
+            //print("Mouse has been left clicked");
             
             RaycastHit hit; 
             Vector3 mousePosition = Mouse.current.position.ReadValue();
@@ -73,7 +73,7 @@ namespace TigerFrogGames
         
         private void MouseRightClickOnperformed(InputAction.CallbackContext obj)
         {
-            print("Mouse has been right clicked");
+            //print("Mouse has been right clicked");
         }
         
         #endregion

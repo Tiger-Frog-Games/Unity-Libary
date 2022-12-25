@@ -11,8 +11,6 @@ namespace TigerFrogGames
 
         [SerializeField] private StatBlock statBlock;
 
-        [SerializeField] private CustomTagStat stat;
-        
         [SerializeField] private CustomTagStat hp;
         
         private StatusEffectDuration.OnProcEvent test;

@@ -30,7 +30,6 @@ namespace TigerFrogGames
 
         private List<StatusEffectDuration> _durational = new();
         
-        
         private List<StatusEffectConditionalStat> _conditionalStat = new ();
         private List<StatusEffectConditionalOnMethod> _conditionalOnMethod = new ();
 
