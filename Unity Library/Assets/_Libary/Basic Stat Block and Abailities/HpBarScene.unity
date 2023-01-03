@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d3b6fb1dead6142ab2839fb96a273d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statBlock: {fileID: 171715213}
+  statBlock: {fileID: 171715214}
   hp: {fileID: 11400000, guid: 03c2a8ed8313e714eb809befc3756e8a, type: 2}
 --- !u!114 &30372176
 MonoBehaviour:
@@ -282,6 +282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 171715212}
   - component: {fileID: 171715213}
+  - component: {fileID: 171715214}
   m_Layer: 0
   m_Name: unit - meow mix
   m_TagString: Untagged
@@ -322,6 +323,19 @@ MonoBehaviour:
     statValue: 8
   - statType: {fileID: 11400000, guid: 40451b0f7a5202949b19a08e29b0e606, type: 2}
     statValue: 10
+--- !u!114 &171715214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171715211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4ce62b9fde01f42af6424effe0ef02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statBlock: {fileID: 171715213}
 --- !u!1 &194181949
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,7 +899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d3b6fb1dead6142ab2839fb96a273d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statBlock: {fileID: 171715213}
+  statBlock: {fileID: 171715214}
   hp: {fileID: 11400000, guid: 03c2a8ed8313e714eb809befc3756e8a, type: 2}
 --- !u!114 &810398995
 MonoBehaviour:

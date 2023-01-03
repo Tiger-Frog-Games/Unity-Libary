@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace TigerFrogGames
 {
-    public class StatBlockTester : MonoBehaviour
+    public class StatusEffectUnitManagerTester : MonoBehaviour
     {
         #region Variables
 
-        [SerializeField] private StatBlock statBlock;
+        [SerializeField] private StatusEffectUnitManager statBlock;
 
         [SerializeField] private CustomTagStat hp;
         

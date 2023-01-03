@@ -12,6 +12,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/_Libary/Basic Stat Block and Abailities/StatusEffects/StatusEffectInstant.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Libary/Basic Stat Block and Abailities/StatusEffects/StatusEffectUnitManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -107,7 +108,8 @@
       <workItem from="1671858935972" duration="1632000" />
       <workItem from="1671861024784" duration="99000" />
       <workItem from="1671861650997" duration="3070000" />
-      <workItem from="1671900391342" duration="1852000" />
+      <workItem from="1671900391342" duration="2444000" />
+      <workItem from="1672775780558" duration="4289000" />
     </task>
     <servers />
   </component>
