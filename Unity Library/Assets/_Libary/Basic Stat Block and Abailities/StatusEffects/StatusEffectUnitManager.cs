@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace TigerFrogGames
@@ -12,8 +13,7 @@ namespace TigerFrogGames
         
         private List<StatusEffectDuration> _durational = new();
         
-        private List<StatusEffectConditionalStat> _conditionalStat = new ();
-        private List<StatusEffectConditionalOnMethod> _conditionalOnMethod = new ();
+        private List<StatusEffectInstant> _conditionalStatChanges = new ();
         
         #endregion
 
@@ -36,8 +36,8 @@ namespace TigerFrogGames
             {
                 
                 if (_durational[i].RemoveTimeFromDuration(Time.deltaTime )) continue;
-                _durational[i].OnEffectOver();
-                _durational.RemoveAt(i);
+   
+                RemoveStatusEffectDuration(_durational[i]);
             }
             
         }
@@ -53,12 +53,21 @@ namespace TigerFrogGames
         
         public void AddStatusEffectDuration(StatusEffectDuration newEffect)
         {
-            _durational.Add(newEffect);
+            if (!_durational.Contains(newEffect) || newEffect.StatusApplyConflict == StatusEffectDurationConflict.AddUniqueStatusEffect)
+            {
+                newEffect.OnApplyStatusEffect();
+                _durational.Add(newEffect);
+            }
+            else
+            {
+                newEffect.Refresh();   
+            }
         }
-
-        public void AddStatusEffectConditional(StatusEffectConditionalStat newEffect)
+        
+        private void RemoveStatusEffectDuration(StatusEffectDuration effectToRemove)
         {
-            _conditionalStat.Add(newEffect);
+            effectToRemove.OnRemoveStatusEffect();
+            _durational.Remove(effectToRemove);
         }
         
         private void GameStateManager_OnGameStateChanged(GameState newGameState)
@@ -66,17 +75,11 @@ namespace TigerFrogGames
             this.enabled = (newGameState == GameState.Gameplay) ;
         }
         
-        
         public float GetStatChangesFromConditionalChanges(CustomTagStat statToGet)
         {
-           
-                float temp = 0;
-            
-                //Adds the stat effects from the conditional and durational effects. 
-                foreach (var effect1 in _conditionalStat.FindAll(effect => effect.StatToEffect == statToGet)) temp += effect1.Value;
-                
-                return temp;
+            //Adds the stat effects from the conditional and durational effects. 
 
+            return _conditionalStatChanges.FindAll(effect => effect.StatToEffect == statToGet).Sum(effect1 => effect1.Value);
         }
         
         #endregion
