@@ -9,6 +9,9 @@ namespace TigerFrogGames
     {
         #region Variables
         
+        //ID?
+        //Name?
+        
         #endregion
         
         #region Methods
@@ -22,8 +25,15 @@ namespace TigerFrogGames
         {
             //OnEffectOverFromTime?.Invoke();
         }
+
+        public virtual void Reset()
+        {
+            
+        }
         
+        public abstract StatusEffect Clone();
+
         #endregion
-        
+
     }
 }

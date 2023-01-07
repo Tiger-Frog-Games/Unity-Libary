@@ -8,12 +8,13 @@ namespace TigerFrogGames
 {
     public enum StatusEffectDurationConflict
     {
-        Nothing = 100,
-        AddingTimeToEnd = 200,
+        CantAddMoreThenOne = 100,
+        AddTime = 200,
         Refresh = 300,
         AddStack = 400,
         AddStackRefresh = 500,
-        AddUniqueStatusEffect = 600
+        AddStackAddTime = 600,
+        AddUniqueStatusEffect = 700
     }
     
     public class StatusEffectDuration : StatusEffectConditional
@@ -25,20 +26,25 @@ namespace TigerFrogGames
         
         private float _durationToAdd;
         
+        public delegate void OnRefreshEvent(float durationLeft);
+        private OnRefreshEvent _onRefreshEvent;
+        
         private int _stackMax;
         private int _stackCurrent;
-        
+        private int _stackStarting;
+
+        private bool _loseOneStackOnOver;
         
         public delegate void OnProcEvent();
-        private OnProcEvent _procMethod;
+        private OnProcEvent _onProcEvent;
 
         public delegate void OnStackEvent(int currentStack, int maxStacks);
-        private OnStackEvent _stackMethod;
+        private OnStackEvent _onStackEvent;
         
         private float _procCooldownTime;
         private float _procCurrentCoolDown;
 
-        public StatusEffectDurationConflict StatusApplyConflict { private set; get; }
+        public StatusEffectDurationConflict ConflictResolutionType { private set; get; }
 
         #endregion
         
@@ -46,30 +52,48 @@ namespace TigerFrogGames
 
         #endregion
 
-        public StatusEffectDuration(StatusEffectDurationConflict conflictResolutionType, float duration, int startingStacks = 0, int stackMax = 0,  bool isRemovedOnReset = false, OnApplyEvent onApplyEvent = null,
-            OnRefreshEvent onRefreshEvent = null, OnStackEvent onStackEvent = null, OnProcEvent onProcEvent = null, OnRemoveEvent onRemoveEvent = null,
+        public StatusEffectDuration(StatusEffectDurationConflict conflictResolutionTypeResolutionType, float duration, float durationToAdd = 0, int startingStacks = 0, int stackMax = 0, bool loseOneStackOnOver = false,   bool isRemovedOnReset = false, OnApplyEvent onApplyEvent = null,
+            OnRefreshEvent onRefreshEvent = null, OnStackEvent onChangeStackEvent = null, OnProcEvent onOnProcEvent = null, OnRemoveEvent onRemoveEvent = null,
             float procCooldown = 0) 
-            : base(isRemovedOnReset, onRefreshEvent, onApplyEvent, onRemoveEvent)
+            : base(isRemovedOnReset, onApplyEvent, onRemoveEvent)
         {
-            StatusApplyConflict = conflictResolutionType;
+            ConflictResolutionType = conflictResolutionTypeResolutionType;
             
             _durationLeft = duration;
+            _durationMax = duration;
+            _durationToAdd = durationToAdd;
 
-            _procMethod = onProcEvent;
+            if (( ConflictResolutionType == StatusEffectDurationConflict.AddTime || conflictResolutionTypeResolutionType == StatusEffectDurationConflict.AddStackAddTime) && durationToAdd == 0 )
+            {
+                Debug.Log("Warning there is no time added to the stack duration");
+            }
+
+            _onRefreshEvent = onRefreshEvent;
+            
+            _onProcEvent = onOnProcEvent;
 
             _procCooldownTime = procCooldown;
             _procCurrentCoolDown = 0;
 
-            if (_procMethod != null && _procCooldownTime == 0)
+            if (_onProcEvent != null && _procCooldownTime == 0)
             {
                 Debug.Log("Warning there is no cooldown for the the ProcEvent");
             }
             
             _stackCurrent = startingStacks;
             _stackMax = stackMax;
-            _stackMethod = onStackEvent;
+            _onStackEvent = onChangeStackEvent;
+
+            if ((_stackCurrent == 0 || _stackMax == 0) &&
+                ConflictResolutionType is StatusEffectDurationConflict.AddStack
+                    or StatusEffectDurationConflict.AddStackAddTime or StatusEffectDurationConflict.AddStackRefresh)
+            {
+                Debug.Log("Warning starting stacks or max stacks is not set");
+            }
             
-            if (StatusApplyConflict is StatusEffectDurationConflict.AddStack or StatusEffectDurationConflict.AddStackRefresh && _stackMax <= 0 )
+            _loseOneStackOnOver = loseOneStackOnOver;
+            
+            if (ConflictResolutionType is StatusEffectDurationConflict.AddStack or StatusEffectDurationConflict.AddStackRefresh && _stackMax <= 0 )
             {
                 Debug.Log("Warning Stack max cant be 0 or negative for this status effect");
             }
@@ -80,52 +104,74 @@ namespace TigerFrogGames
         {
             _durationLeft -= time;
             
-            if (_procMethod != null)
+            if (_onProcEvent != null)
             {
                 _procCurrentCoolDown += time;
                 if (_procCurrentCoolDown >= _procCooldownTime)
                 {
-                    _procMethod?.Invoke();
+                    _onProcEvent?.Invoke();
                     _procCurrentCoolDown -= _procCooldownTime;
                 }
             }
-            
+
+            if (_durationLeft < 0 && _loseOneStackOnOver)
+            {
+                changeStack(-1);
+                if(_stackCurrent != 0) _durationLeft = _durationMax;
+            }
             
             return (_durationLeft > 0);
         }
 
+        
+        
         public void Refresh()
         {
-            switch (StatusApplyConflict)
+            //Handles CantAddMoreThenOne and AddUniqueStatusEffect inside the StatusEffect Handler
+            
+            switch (ConflictResolutionType)
             {
-                case StatusEffectDurationConflict.Nothing:
-                    return;
-                case StatusEffectDurationConflict.AddingTimeToEnd:
-                    _durationLeft += _durationToAdd;
+                case StatusEffectDurationConflict.AddTime:
+                    _durationLeft = Mathf.Min(_durationMax ,_durationLeft + _durationToAdd);
                     break;
                 case StatusEffectDurationConflict.Refresh:
                     _durationLeft = _durationMax;
                     break;
                 case StatusEffectDurationConflict.AddStack:
-                    addStack();
-                    _durationLeft += _durationToAdd;
+                    changeStack(1);
                     break;
                 case StatusEffectDurationConflict.AddStackRefresh:
-                    addStack();
                     _durationLeft = _durationMax;
                     break;
-                case StatusEffectDurationConflict.AddUniqueStatusEffect:
-                    //this is handled in statuseffect manager;
+                case StatusEffectDurationConflict.AddStackAddTime:
+                    changeStack(1);
+                    _durationLeft = Mathf.Min(_durationMax ,_durationLeft + _durationToAdd);
                     break;
                 default:
                     return;
             }
+            _onRefreshEvent?.Invoke(_durationLeft);
         }
 
-        private void addStack()
+        public override void Reset()
         {
-            _stackCurrent = Mathf.Min(_stackCurrent+1 ,_stackMax);
-            _stackMethod?.Invoke(_stackCurrent, _stackMax);
+            base.Reset();
+            _stackCurrent = _stackStarting;
+            _durationLeft = _durationMax;
+        }
+
+        public override StatusEffect Clone()
+        {
+            return new StatusEffectDuration(ConflictResolutionType, _durationMax, _durationToAdd,  _stackStarting, _stackMax, _loseOneStackOnOver,   _isRemovedOnReset, _onApplyEvent,
+                _onRefreshEvent, _onStackEvent, _onProcEvent, _onRemoveEvent , _procCooldownTime );
+
+        }
+
+        private void changeStack(int stackChangeNumber)
+        {
+            _stackCurrent = Mathf.Min(_stackCurrent+stackChangeNumber ,_stackMax);
+            
+            if(_stackCurrent != 0) _onStackEvent?.Invoke(_stackCurrent, _stackMax);
         }
         
     }

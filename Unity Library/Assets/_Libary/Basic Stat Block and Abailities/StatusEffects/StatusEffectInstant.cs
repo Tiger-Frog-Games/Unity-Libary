@@ -14,7 +14,7 @@ namespace TigerFrogGames
         #endregion
         
         #region Methods
-
+        
         #endregion
 
         public StatusEffectInstant(CustomTagStat statToEffect, float value) : base()
@@ -30,7 +30,11 @@ namespace TigerFrogGames
             }
             
             #endif
-            
+        }
+        
+        public override StatusEffect Clone()
+        {
+            return new StatusEffectInstant(StatToEffect, Value);
         }
     }
 }

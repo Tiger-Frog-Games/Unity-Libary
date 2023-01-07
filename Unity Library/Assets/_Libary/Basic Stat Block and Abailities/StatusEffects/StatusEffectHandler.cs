@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TigerFrogGames
 {
-    public class StatusEffectUnitManager : MonoBehaviour
+    public class StatusEffectHandler : MonoBehaviour
     {
         #region Variables
 
@@ -53,8 +53,13 @@ namespace TigerFrogGames
         
         public void AddStatusEffectDuration(StatusEffectDuration newEffect)
         {
-            if (!_durational.Contains(newEffect) || newEffect.StatusApplyConflict == StatusEffectDurationConflict.AddUniqueStatusEffect)
+            if (!_durational.Contains(newEffect) || newEffect.ConflictResolutionType == StatusEffectDurationConflict.AddUniqueStatusEffect)
             {
+                if (newEffect.ConflictResolutionType == StatusEffectDurationConflict.AddUniqueStatusEffect)
+                {
+                    newEffect = (StatusEffectDuration)newEffect.Clone();
+                }
+                
                 newEffect.OnApplyStatusEffect();
                 _durational.Add(newEffect);
             }
@@ -68,6 +73,7 @@ namespace TigerFrogGames
         {
             effectToRemove.OnRemoveStatusEffect();
             _durational.Remove(effectToRemove);
+            effectToRemove.Reset();
         }
         
         private void GameStateManager_OnGameStateChanged(GameState newGameState)

@@ -9,27 +9,24 @@ namespace TigerFrogGames
     {
         #region Variables
 
-        private bool _isRemovedOnReset;
+        protected bool _isRemovedOnReset;
         
         public delegate void OnApplyEvent();
-        private OnApplyEvent _onApplyEvent;
-        
-        public delegate void OnRefreshEvent();
-        private OnRefreshEvent _onRefreshEvent;
+        protected OnApplyEvent _onApplyEvent;
         
         public delegate void OnRemoveEvent();
-        private OnRemoveEvent _onRemoveEvent;
+        protected OnRemoveEvent _onRemoveEvent;
         
         #endregion
         
         #region Methods
 
         
-        public StatusEffectConditional(bool isRemovedOnReset = false, OnRefreshEvent onRefreshEvent = null, OnApplyEvent onApplyEvent = null, OnRemoveEvent onRemoveEvent= null)
+        public StatusEffectConditional(bool isRemovedOnReset = false, OnApplyEvent onApplyEvent = null, OnRemoveEvent onRemoveEvent= null)
         {
             _isRemovedOnReset = isRemovedOnReset;
+            
             _onApplyEvent = onApplyEvent;
-            _onRefreshEvent = onRefreshEvent;
             _onRemoveEvent = onRemoveEvent;
         }
 
@@ -37,18 +34,17 @@ namespace TigerFrogGames
         {
             _onApplyEvent?.Invoke();
         }
-
-        public virtual void OnRefreshStatusEffect()
-        {
-            _onRefreshEvent?.Invoke();
-        }
         
-        public virtual void OnRemoveStatusEffect()
+        public void OnRemoveStatusEffect()
         {
             _onRemoveEvent?.Invoke();
         }
-        
-        
+
+        public override StatusEffect Clone()
+        {
+            return new StatusEffectConditional(_isRemovedOnReset, _onApplyEvent, _onRemoveEvent );
+        }
+
         #endregion
         
     }
