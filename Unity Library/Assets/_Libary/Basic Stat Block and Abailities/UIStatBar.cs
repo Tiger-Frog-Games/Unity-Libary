@@ -39,7 +39,6 @@ namespace TigerFrogGames
         {
             if(statBlock.GetStat(hpTag) != null) statBlock.GetStat(hpTag).OnStatChange -= OnHpStatChange;
             
-            
             if(statBlock.GetStat(maxHpTag) != null)statBlock.GetStat(maxHpTag).OnStatChange -= OnMaxHpStatChange;
         }
 

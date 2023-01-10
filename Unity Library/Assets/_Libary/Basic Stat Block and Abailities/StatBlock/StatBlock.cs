@@ -17,12 +17,13 @@ namespace TigerFrogGames
         #region Variables
 
         [SerializeField] private List<statInfo> initializingStats;
-        
+
+        private Dictionary<CustomTagStat, float> _statsBase = new ();
         /// <summary>
-        /// Will always be upto date when a new condition is added/removed
+        /// Will always be upto date when a new change happened
         /// </summary>
         private Dictionary<CustomTagStat, Stat> _stats = new();
-        
+
         #endregion
 
         #region Unity Methods
@@ -32,6 +33,7 @@ namespace TigerFrogGames
             foreach (var v in initializingStats)
             {
                 ChangeStat(v.statType, v.statValue);
+                _statsBase.Add(v.statType, v.statValue);
             }
         }
         
@@ -56,6 +58,15 @@ namespace TigerFrogGames
             if ( _stats.TryGetValue(statToGet, out Stat value ))
             {
                 return value.Value ;
+            }
+            return 0;
+        }
+
+        public float GetBaseStatValue(CustomTagStat statToGet)
+        {
+            if ( _statsBase.TryGetValue(statToGet, out float value ))
+            {
+                return value;
             }
             return 0;
         }

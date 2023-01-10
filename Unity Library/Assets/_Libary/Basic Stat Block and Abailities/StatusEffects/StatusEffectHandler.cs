@@ -41,7 +41,7 @@ namespace TigerFrogGames
 
         #region Methods
 
-        protected void OnTick(float timeChange)
+        private void OnTick(float timeChange)
         {
             for (int i = -_conditional.Count - 1; i >= 0; i--)
             {
