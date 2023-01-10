@@ -4,13 +4,9 @@ using UnityEngine;
 
 namespace TigerFrogGames
 {
-    public class StatBlock : MonoBehaviour
+    public class StatusEffectExpirable : MonoBehaviour
     {
         #region Variables
-
-        private Dictionary<CustomTagStat, float> _baseStats;
-
-        private List<Buff> _TimedBuffs;
 
         #endregion
 
@@ -20,11 +16,6 @@ namespace TigerFrogGames
 
         #region Methods
 
-        public void AddStat(CustomTagStat statToAdd)
-        {
-            
-        }
-        
         #endregion
     }
 }
