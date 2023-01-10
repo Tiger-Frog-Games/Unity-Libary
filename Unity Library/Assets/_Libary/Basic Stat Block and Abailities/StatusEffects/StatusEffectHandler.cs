@@ -43,7 +43,6 @@ namespace TigerFrogGames
 
         protected void OnTick(float timeChange)
         {
-            print(_conditional.Count);
             for (int i = -_conditional.Count - 1; i >= 0; i--)
             {
                 _conditional[i].checkForProcEvent(timeChange);
