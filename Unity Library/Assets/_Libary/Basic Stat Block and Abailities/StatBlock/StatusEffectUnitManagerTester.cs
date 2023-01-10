@@ -15,8 +15,6 @@ namespace TigerFrogGames
 
         [SerializeField] private CustomTagStat hp;
         
-        private StatusEffectDuration.OnProcEvent DealDamageMethod;
-
         private StatusEffectDuration testOnDealDamageOverTimeUniqueStatusEffects;
         
         private StatusEffectDuration testDurationLostOneStack;
@@ -31,6 +29,9 @@ namespace TigerFrogGames
 
         private StatusEffectDuration testAddStackAddDurationTime;
 
+        private StatusEffectConditional testConditional;
+        
+
         #endregion
 
         private void Start()
@@ -40,10 +41,9 @@ namespace TigerFrogGames
             StatusEffectDuration.OnRemoveEvent remove = printOver;
             StatusEffectDuration.OnRefreshEvent refresh = OnRefreshEvent;
             
+            StatusEffectConditional.OnProcEvent dealDamageMethod = DealDamage;
             
-            DealDamageMethod = DealDamage;
-            
-            testOnDealDamageOverTimeUniqueStatusEffects = new StatusEffectDuration( StatusEffectDurationConflict.AddUniqueStatusEffect, duration: 10, procCooldown: 1f , onOnProcEvent: DealDamageMethod );
+            testOnDealDamageOverTimeUniqueStatusEffects = new StatusEffectDuration( StatusEffectDurationConflict.AddUniqueStatusEffect, duration: 10, procCooldown: 1f , onProcEvent: dealDamageMethod );
 
             testDurationLostOneStack = new StatusEffectDuration(StatusEffectDurationConflict.AddStack, duration: 10f, startingStacks: 1, stackMax: 5, onChangeStackEvent: testStackEvent , loseOneStackOnOver: true, onApplyEvent: start, onRemoveEvent: remove );
             
@@ -56,13 +56,15 @@ namespace TigerFrogGames
             testAddDurationTime = new StatusEffectDuration(StatusEffectDurationConflict.AddTime, duration: 10f, durationToAdd: 1f, onApplyEvent: start, onRefreshEvent:refresh, onRemoveEvent: remove);
 
             testAddStackAddDurationTime = new StatusEffectDuration(StatusEffectDurationConflict.AddStackAddTime, duration: 10f, durationToAdd: 1f, onApplyEvent: start, onRefreshEvent:refresh,stackMax: 10,startingStacks: 5, onChangeStackEvent: testStackEvent, onRemoveEvent: remove, loseOneStackOnOver: true);
+
+            testConditional = new StatusEffectConditional(onApplyEvent: start, onRemoveEvent: remove, onOnProcEvent: dealDamageMethod, procCooldown: 1f);
         }
 
         #region Methods
 
         public void testAddDamageOverTimeUniqueEffect()
         {
-            UnitStatusEffectHandler.AddStatusEffectDuration(testOnDealDamageOverTimeUniqueStatusEffects);
+            UnitStatusEffectHandler.AddStatusEffectDurational(testOnDealDamageOverTimeUniqueStatusEffects);
         }
 
         
@@ -79,32 +81,45 @@ namespace TigerFrogGames
         
         public void testStackingStatusEffectLostOneStack()
         {
-            UnitStatusEffectHandler.AddStatusEffectDuration(testDurationLostOneStack);
+            UnitStatusEffectHandler.AddStatusEffectDurational(testDurationLostOneStack);
         }
 
         public void testStackingStatusEffectClearAll()
         {
-            UnitStatusEffectHandler.AddStatusEffectDuration(testDurationLoseAllStacks);
+            UnitStatusEffectHandler.AddStatusEffectDurational(testDurationLoseAllStacks);
         }
         
         public void testCantAddMoreThenOneTest()
         {
-            UnitStatusEffectHandler.AddStatusEffectDuration(testCantAddMoreThenOne);
+            UnitStatusEffectHandler.AddStatusEffectDurational(testCantAddMoreThenOne);
         }
 
         public void testRefresh()
         {
-            UnitStatusEffectHandler.AddStatusEffectDuration(testRefreshDuration);
+            UnitStatusEffectHandler.AddStatusEffectDurational(testRefreshDuration);
         }
 
         public void testAddTimeOnto()
         {
-            UnitStatusEffectHandler.AddStatusEffectDuration(testAddDurationTime);
+            UnitStatusEffectHandler.AddStatusEffectDurational(testAddDurationTime);
         }
 
         public void testAddStackAddTime()
         {
-            UnitStatusEffectHandler.AddStatusEffectDuration(testAddStackAddDurationTime);
+            UnitStatusEffectHandler.AddStatusEffectDurational(testAddStackAddDurationTime);
+        }
+
+        
+        public void testTurnOnCondition()
+        {
+            print(testConditional.ID);
+            UnitStatusEffectHandler.AddStatusEffectConditional( testConditional);
+        }
+
+        public void testTurnOffCondition()
+        {
+            print(testConditional.ID);
+            UnitStatusEffectHandler.RemoveStatusEffectConditional(testConditional);
         }
         
         private void printApplied()
@@ -123,6 +138,8 @@ namespace TigerFrogGames
             //testDuration = null;
         }
 
+        
+        
 
         #endregion
     }

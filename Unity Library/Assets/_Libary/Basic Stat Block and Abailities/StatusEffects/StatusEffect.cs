@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 
 namespace TigerFrogGames
@@ -10,6 +11,9 @@ namespace TigerFrogGames
         #region Variables
         
         //ID?
+
+        public Guid ID { private set; get;}
+        
         //Name?
         
         #endregion
@@ -18,7 +22,7 @@ namespace TigerFrogGames
 
         public StatusEffect()
         {
-            
+            ID = Guid.NewGuid();
         }
         
         public virtual void OnAddEffect()

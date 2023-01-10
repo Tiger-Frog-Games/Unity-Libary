@@ -11,6 +11,8 @@ namespace TigerFrogGames
 
         [SerializeField] private StatBlock _statBlock;
         
+        
+        private List<StatusEffectConditional> _conditional = new();
         private List<StatusEffectDuration> _durational = new();
         
         private List<StatusEffectInstant> _conditionalStatChanges = new ();
@@ -30,28 +32,50 @@ namespace TigerFrogGames
             GameStateManager.Instance.OnGameStateChanged -= GameStateManager_OnGameStateChanged;
         }
         
-        private void Update()
+        protected void Update()
         {
-            for (int i = _durational.Count - 1; i >= 0; i--)
-            {
-                
-                if (_durational[i].RemoveTimeFromDuration(Time.deltaTime )) continue;
-   
-                RemoveStatusEffectDuration(_durational[i]);
-            }
-            
+            OnTick(Time.deltaTime);
         }
         
         #endregion
 
         #region Methods
 
+        protected void OnTick(float timeChange)
+        {
+            print(_conditional.Count);
+            for (int i = -_conditional.Count - 1; i >= 0; i--)
+            {
+                _conditional[i].checkForProcEvent(timeChange);
+            }
+            
+            for (int i = _durational.Count - 1; i >= 0; i--)
+            {
+                _durational[i].checkForProcEvent(timeChange);
+                
+                if (_durational[i].RemoveTimeFromDuration(Time.deltaTime )) continue;
+                RemoveStatusEffectDurational(_durational[i]);
+            }
+        }
+        
         public void AddStatusEffectInstant(StatusEffectInstant newEffect)
         {
             _statBlock.AddStat(newEffect.StatToEffect,newEffect.Value);
         }
+
+        public void AddStatusEffectConditional( StatusEffectConditional newEffect)
+        {
+            print(newEffect.ID);
+            _conditional.Add(newEffect);
+        }
+
+        public void RemoveStatusEffectConditional( StatusEffectConditional effectToRemove)
+        {
+            print(effectToRemove.ID);
+            _conditional.RemoveAll(r => r.ID == effectToRemove.ID);
+        }
         
-        public void AddStatusEffectDuration(StatusEffectDuration newEffect)
+        public void AddStatusEffectDurational(StatusEffectDuration newEffect)
         {
             if (!_durational.Contains(newEffect) || newEffect.ConflictResolutionType == StatusEffectDurationConflict.AddUniqueStatusEffect)
             {
@@ -69,7 +93,7 @@ namespace TigerFrogGames
             }
         }
         
-        private void RemoveStatusEffectDuration(StatusEffectDuration effectToRemove)
+        private void RemoveStatusEffectDurational(StatusEffectDuration effectToRemove)
         {
             effectToRemove.OnRemoveStatusEffect();
             _durational.Remove(effectToRemove);
