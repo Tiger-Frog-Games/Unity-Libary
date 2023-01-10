@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,7 +15,7 @@ namespace TigerFrogGames
         private List<StatusEffectConditional> _conditional = new();
         private List<StatusEffectDuration> _durational = new();
         
-        private List<StatusEffectInstant> _conditionalStatChanges = new ();
+        private List<StatusEffectInstant> _temporaryStatChanges = new ();
         
         #endregion
 
@@ -57,29 +57,42 @@ namespace TigerFrogGames
                 RemoveStatusEffectDurational(_durational[i]);
             }
         }
-        
-        public void AddStatusEffectInstant(StatusEffectInstant newEffect)
+
+        public virtual void AddStatusEffectInstant(StatusEffectInstant newEffect)
         {
-            _statBlock.AddStat(newEffect.StatToEffect,newEffect.Value);
+            if (newEffect.IsPermanentChange == false)
+            {
+                _temporaryStatChanges.Add(newEffect);
+            }
+            
+            _statBlock.ChangeStat(newEffect.StatToEffect,newEffect.Value);
         }
 
         public void AddStatusEffectConditional( StatusEffectConditional newEffect)
         {
-            print(newEffect.ID);
             _conditional.Add(newEffect);
+            newEffect.OnApplyStatusEffect();
         }
 
         public void RemoveStatusEffectConditional( StatusEffectConditional effectToRemove)
         {
-            print(effectToRemove.ID);
-            _conditional.RemoveAll(r => r.ID == effectToRemove.ID);
+            _conditional.RemoveAll(r =>
+            {
+                if (r.ID == effectToRemove.ID)
+                {
+                    effectToRemove.OnRemoveStatusEffect();
+                    effectToRemove.Reset();
+                    return true;
+                }
+                return false;
+            });
         }
         
         public void AddStatusEffectDurational(StatusEffectDuration newEffect)
         {
-            if (!_durational.Contains(newEffect) || newEffect.ConflictResolutionType == StatusEffectDurationConflict.AddUniqueStatusEffect)
+            if (!_durational.Contains(newEffect) || newEffect.ConflictResolutionType == StatusEffectDurationConflict.AddIndependent)
             {
-                if (newEffect.ConflictResolutionType == StatusEffectDurationConflict.AddUniqueStatusEffect)
+                if (newEffect.ConflictResolutionType == StatusEffectDurationConflict.AddIndependent)
                 {
                     newEffect = (StatusEffectDuration)newEffect.Clone();
                 }
@@ -95,9 +108,16 @@ namespace TigerFrogGames
         
         private void RemoveStatusEffectDurational(StatusEffectDuration effectToRemove)
         {
-            effectToRemove.OnRemoveStatusEffect();
-            _durational.Remove(effectToRemove);
-            effectToRemove.Reset();
+            _durational.RemoveAll(r =>
+            {
+                if (r.ID == effectToRemove.ID)
+                {
+                    effectToRemove.OnRemoveStatusEffect();
+                    effectToRemove.Reset();
+                    return true;
+                }
+                return false;
+            });
         }
         
         private void GameStateManager_OnGameStateChanged(GameState newGameState)
@@ -105,11 +125,14 @@ namespace TigerFrogGames
             this.enabled = (newGameState == GameState.Gameplay) ;
         }
         
-        public float GetStatChangesFromConditionalChanges(CustomTagStat statToGet)
+        public float GetTemporaryStatChanges(CustomTagStat statToGet)
         {
-            //Adds the stat effects from the conditional and durational effects. 
+            return _temporaryStatChanges.FindAll(effect => effect.StatToEffect == statToGet).Sum(effect1 => effect1.Value);
+        }
 
-            return _conditionalStatChanges.FindAll(effect => effect.StatToEffect == statToGet).Sum(effect1 => effect1.Value);
+        public bool DoesConditionalByID( Guid IDtoCheck )
+        {
+            return _conditional.Exists(e => e.ID == IDtoCheck);
         }
         
         #endregion

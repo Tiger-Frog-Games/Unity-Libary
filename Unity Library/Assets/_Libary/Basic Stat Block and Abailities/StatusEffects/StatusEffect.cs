@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml;
-using UnityEngine;
 
 namespace TigerFrogGames
 {
@@ -20,16 +16,11 @@ namespace TigerFrogGames
         
         #region Methods
 
-        public StatusEffect()
+        protected StatusEffect()
         {
             ID = Guid.NewGuid();
         }
         
-        public virtual void OnAddEffect()
-        {
-            //OnEffectOverFromTime?.Invoke();
-        }
-
         public virtual void Reset()
         {
             

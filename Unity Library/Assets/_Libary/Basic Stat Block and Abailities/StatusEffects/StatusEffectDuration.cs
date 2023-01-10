@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace TigerFrogGames
@@ -14,7 +10,7 @@ namespace TigerFrogGames
         AddStack = 400,
         AddStackRefresh = 500,
         AddStackAddTime = 600,
-        AddUniqueStatusEffect = 700
+        AddIndependent = 700
     }
     
     public class StatusEffectDuration : StatusEffectConditional

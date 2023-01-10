@@ -14,6 +14,7 @@ namespace TigerFrogGames
         [SerializeField] private StatusEffectHandler UnitStatusEffectHandler;
 
         [SerializeField] private CustomTagStat hp;
+        [SerializeField] private CustomTagStat MaxHp;
         
         private StatusEffectDuration testOnDealDamageOverTimeUniqueStatusEffects;
         
@@ -37,27 +38,27 @@ namespace TigerFrogGames
         private void Start()
         {
             StatusEffectDuration.OnStackEvent testStackEvent = OnStackEvent;
-            StatusEffectDuration.OnApplyEvent start = printApplied;
+            StatusEffectDuration.OnApplyEvent apply = printApplied;
             StatusEffectDuration.OnRemoveEvent remove = printOver;
             StatusEffectDuration.OnRefreshEvent refresh = OnRefreshEvent;
             
             StatusEffectConditional.OnProcEvent dealDamageMethod = DealDamage;
-            
-            testOnDealDamageOverTimeUniqueStatusEffects = new StatusEffectDuration( StatusEffectDurationConflict.AddUniqueStatusEffect, duration: 10, procCooldown: 1f , onProcEvent: dealDamageMethod );
 
-            testDurationLostOneStack = new StatusEffectDuration(StatusEffectDurationConflict.AddStack, duration: 10f, startingStacks: 1, stackMax: 5, onChangeStackEvent: testStackEvent , loseOneStackOnOver: true, onApplyEvent: start, onRemoveEvent: remove );
-            
-            testDurationLoseAllStacks = new StatusEffectDuration(StatusEffectDurationConflict.AddStack, duration: 10f, startingStacks: 1, stackMax: 5, onChangeStackEvent: testStackEvent, onApplyEvent: start, onRemoveEvent: remove );
-            
-            testCantAddMoreThenOne = new StatusEffectDuration(StatusEffectDurationConflict.CantAddMoreThenOne, duration: 10f, onApplyEvent: start, onRemoveEvent: remove );
+            testOnDealDamageOverTimeUniqueStatusEffects = new StatusEffectDuration( StatusEffectDurationConflict.AddIndependent, duration: 10, procCooldown: 1f , onProcEvent: dealDamageMethod );
 
-            testRefreshDuration = new StatusEffectDuration(StatusEffectDurationConflict.Refresh, duration: 10f, onApplyEvent: start, onRefreshEvent:refresh, onRemoveEvent: remove);
+            testDurationLostOneStack = new StatusEffectDuration(StatusEffectDurationConflict.AddStack, duration: 10f, startingStacks: 1, stackMax: 5, onChangeStackEvent: testStackEvent , loseOneStackOnOver: true, onApplyEvent: apply, onRemoveEvent: remove );
             
-            testAddDurationTime = new StatusEffectDuration(StatusEffectDurationConflict.AddTime, duration: 10f, durationToAdd: 1f, onApplyEvent: start, onRefreshEvent:refresh, onRemoveEvent: remove);
+            testDurationLoseAllStacks = new StatusEffectDuration(StatusEffectDurationConflict.AddStack, duration: 10f, startingStacks: 1, stackMax: 5, onChangeStackEvent: testStackEvent, onApplyEvent: apply, onRemoveEvent: remove );
+            
+            testCantAddMoreThenOne = new StatusEffectDuration(StatusEffectDurationConflict.CantAddMoreThenOne, duration: 10f, onApplyEvent: apply, onRemoveEvent: remove );
 
-            testAddStackAddDurationTime = new StatusEffectDuration(StatusEffectDurationConflict.AddStackAddTime, duration: 10f, durationToAdd: 1f, onApplyEvent: start, onRefreshEvent:refresh,stackMax: 10,startingStacks: 5, onChangeStackEvent: testStackEvent, onRemoveEvent: remove, loseOneStackOnOver: true);
+            testRefreshDuration = new StatusEffectDuration(StatusEffectDurationConflict.Refresh, duration: 10f, onApplyEvent: apply, onRefreshEvent:refresh, onRemoveEvent: remove);
+            
+            testAddDurationTime = new StatusEffectDuration(StatusEffectDurationConflict.AddTime, duration: 10f, durationToAdd: 1f, onApplyEvent: apply, onRefreshEvent:refresh, onRemoveEvent: remove);
 
-            testConditional = new StatusEffectConditional(onApplyEvent: start, onRemoveEvent: remove, onOnProcEvent: dealDamageMethod, procCooldown: 1f);
+            testAddStackAddDurationTime = new StatusEffectDuration(StatusEffectDurationConflict.AddStackAddTime, duration: 10f, durationToAdd: 1f, onApplyEvent: apply, onRefreshEvent:refresh,stackMax: 10,startingStacks: 5, onChangeStackEvent: testStackEvent, onRemoveEvent: remove, loseOneStackOnOver: true);
+
+            testConditional = new StatusEffectConditional(onApplyEvent: apply, onRemoveEvent: remove, onOnProcEvent: dealDamageMethod, procCooldown: 1f);
         }
 
         #region Methods
@@ -112,13 +113,11 @@ namespace TigerFrogGames
         
         public void testTurnOnCondition()
         {
-            print(testConditional.ID);
             UnitStatusEffectHandler.AddStatusEffectConditional( testConditional);
         }
 
         public void testTurnOffCondition()
         {
-            print(testConditional.ID);
             UnitStatusEffectHandler.RemoveStatusEffectConditional(testConditional);
         }
         
@@ -129,9 +128,14 @@ namespace TigerFrogGames
         
         public void DealDamage()
         {
-            UnitStatusEffectHandler.AddStatusEffectInstant(new StatusEffectInstant(hp, -1));
+            UnitStatusEffectHandler.AddStatusEffectInstant(new StatusEffectInstant(hp, -1, true));
         }
 
+        public void ChangeMax()
+        {
+            UnitStatusEffectHandler.AddStatusEffectInstant(new StatusEffectInstant(MaxHp, 1, false));
+        }
+        
         private void printOver()
         {
             print("Status Effect Over");

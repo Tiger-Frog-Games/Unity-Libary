@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace TigerFrogGames
@@ -33,17 +31,15 @@ namespace TigerFrogGames
         {
             foreach (var v in initializingStats)
             {
-                AddStat(v.statType, v.statValue);
+                ChangeStat(v.statType, v.statValue);
             }
         }
-        
-        
         
         #endregion
 
         #region Methods
         
-        public void AddStat(CustomTagStat statToGet, float value)
+        public void ChangeStat(CustomTagStat statToGet, float value)
         {
             if ( _stats.TryGetValue(statToGet, out Stat stat ))
             {

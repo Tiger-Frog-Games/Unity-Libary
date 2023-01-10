@@ -11,30 +11,24 @@ namespace TigerFrogGames
         public CustomTagStat StatToEffect { private set; get; }
         public float Value { private set; get; }
         
+        public bool IsPermanentChange { private set; get; }
+        
         #endregion
         
         #region Methods
         
         #endregion
 
-        public StatusEffectInstant(CustomTagStat statToEffect, float value) : base()
+        public StatusEffectInstant(CustomTagStat statToEffect, float value, bool isPermanentChange = false) : base()
         {
             StatToEffect = statToEffect;
             Value = value;
-            
-            #if UNITY_EDITOR
-
-            if (statToEffect.CanBeUsedAsInstantStatusEffect == false)
-            {
-                Debug.Log("Waring trying to use a stat for an instant effect that can not be used");
-            }
-            
-            #endif
+            IsPermanentChange = isPermanentChange;
         }
         
         public override StatusEffect Clone()
         {
-            return new StatusEffectInstant(StatToEffect, Value);
+            return new StatusEffectInstant(StatToEffect, Value, IsPermanentChange);
         }
     }
 }
