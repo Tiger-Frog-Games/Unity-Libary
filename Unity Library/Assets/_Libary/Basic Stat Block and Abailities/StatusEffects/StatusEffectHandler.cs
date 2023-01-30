@@ -9,13 +9,13 @@ namespace TigerFrogGames
     {
         #region Variables
 
-        [SerializeField] private StatBlock _statBlock;
+        [SerializeField] protected StatBlock _statBlock;
         
         
         private List<StatusEffectConditional> _conditional = new();
         private List<StatusEffectDuration> _durational = new();
-        
-        private List<StatusEffectInstant> _temporaryStatChanges = new ();
+
+        protected List<StatusEffectInstant> _temporaryStatChanges = new ();
         
         #endregion
 

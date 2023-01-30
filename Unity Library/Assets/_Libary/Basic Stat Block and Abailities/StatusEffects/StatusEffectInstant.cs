@@ -30,5 +30,10 @@ namespace TigerFrogGames
         {
             return new StatusEffectInstant(StatToEffect, Value, IsPermanentChange);
         }
+
+        public void ChangValue(float newValue)
+        {
+            Value = newValue;
+        }
     }
 }

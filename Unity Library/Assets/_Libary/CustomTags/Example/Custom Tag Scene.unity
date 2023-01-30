@@ -533,6 +533,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 410560777}
   playerInput: {fileID: -944628639613478452, guid: 08c3f8ed01dda3447b0b9a2dc56b2bed, type: 3}
+  _mouseLeftClick:
+    m_Name: Mouse Left Click
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 08769f5c-db6f-43ac-a48b-720b8fe85bfe
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  _mouseRightClick:
+    m_Name: Mouse Right Click
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 945ec7c8-9ce0-490c-b3db-6b695877f2d0
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &991018568
 GameObject:
   m_ObjectHideFlags: 0

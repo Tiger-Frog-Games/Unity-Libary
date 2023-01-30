@@ -13,7 +13,7 @@ namespace TigerFrogGames
         [SerializeField] private InputActionAsset playerInput;
 
         
-        private InputAction _mouseLeftClick, _mouseRightClick;
+        public InputAction _mouseLeftClick, _mouseRightClick;
 
         #endregion
 
@@ -35,22 +35,22 @@ namespace TigerFrogGames
             }
 
             _mouseLeftClick = playerInput.FindAction("LeftClick");
-            _mouseLeftClick.performed += MouseLeftClickOnperformed;
+            _mouseLeftClick.performed += MouseLeftClickOnPerformed;
             
             _mouseRightClick = playerInput.FindAction("RightClick");
-            _mouseRightClick.performed += MouseRightClickOnperformed ;
+            _mouseRightClick.performed += MouseRightClickOnPerformed ;
         }
         
         private void OnDestroy()
         {
             if (_mouseLeftClick != null)
             {
-                _mouseLeftClick.performed -= MouseLeftClickOnperformed;
+                _mouseLeftClick.performed -= MouseLeftClickOnPerformed;
             }
             
             if (_mouseRightClick != null)
             {
-                _mouseRightClick.performed -= MouseRightClickOnperformed;
+                _mouseRightClick.performed -= MouseRightClickOnPerformed;
             }
         }
 
@@ -58,7 +58,7 @@ namespace TigerFrogGames
 
         #region Methods
 
-        private void MouseLeftClickOnperformed(InputAction.CallbackContext obj)
+        private void MouseLeftClickOnPerformed(InputAction.CallbackContext obj)
         {
             //print("Mouse has been left clicked");
             
@@ -71,7 +71,7 @@ namespace TigerFrogGames
             
         }
         
-        private void MouseRightClickOnperformed(InputAction.CallbackContext obj)
+        private void MouseRightClickOnPerformed(InputAction.CallbackContext obj)
         {
             //print("Mouse has been right clicked");
         }
