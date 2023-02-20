@@ -13,7 +13,7 @@ namespace TigerFrogGames
         [SerializeField] private InputActionAsset playerInput;
 
         
-        public InputAction _mouseLeftClick, _mouseRightClick;
+        private InputAction _mouseLeftClick, _mouseRightClick;
 
         #endregion
 
