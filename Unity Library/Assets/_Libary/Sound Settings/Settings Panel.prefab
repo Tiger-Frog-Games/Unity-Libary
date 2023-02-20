@@ -361,7 +361,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7661232361713417598}
         m_TargetAssemblyTypeName: TigerFrogGames.SoundSettings, Assembly-CSharp
         m_MethodName: SetSFXVol
         m_Mode: 1
@@ -2505,7 +2505,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7661232361713417598}
         m_TargetAssemblyTypeName: TigerFrogGames.SoundSettings, Assembly-CSharp
         m_MethodName: SetMasterVol
         m_Mode: 1
@@ -2976,7 +2976,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7661232361713417598}
         m_TargetAssemblyTypeName: TigerFrogGames.SoundSettings, Assembly-CSharp
         m_MethodName: SetMusicVol
         m_Mode: 1

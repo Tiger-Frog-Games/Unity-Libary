@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7348bdf-c8a7-4218-8550-b294bb48aa7a" name="Changes" comment="" />
+    <list default="true" id="b7348bdf-c8a7-4218-8550-b294bb48aa7a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity Library/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity Library/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Libary/Coroutines/CoroutineScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Libary/Coroutines/CoroutineScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Libary/New Input System/InGameClickable/MouseClicker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Libary/New Input System/InGameClickable/MouseClicker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Libary/Sound Settings/Settings Panel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Libary/Sound Settings/Settings Panel.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Libary/Sound Settings/SoundScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Libary/Sound Settings/SoundScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,7 +54,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.1f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.17f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;C:\Users\frogg\OneDrive\Documents\GitHub\Unity-Libary\Unity Library&quot; -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\frogg\OneDrive\Documents\GitHub\Unity-Libary\Unity Library" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -54,7 +62,7 @@
       <method v="2" />
     </configuration>
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.1f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.17f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;C:\Users\frogg\Documents\GitHub\Unity-Libary\Unity Library&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\frogg\Documents\GitHub\Unity-Libary\Unity Library" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -114,7 +122,18 @@
       <workItem from="1672861452364" duration="32847000" />
       <workItem from="1673021021192" duration="23450000" />
       <workItem from="1673290492451" duration="18347000" />
-      <workItem from="1673376708238" duration="3667000" />
+      <workItem from="1673376708238" duration="6272000" />
+      <workItem from="1673466448236" duration="6003000" />
+      <workItem from="1673637277899" duration="747000" />
+      <workItem from="1673803407221" duration="609000" />
+      <workItem from="1673930833849" duration="1685000" />
+      <workItem from="1674202123175" duration="713000" />
+      <workItem from="1674382812869" duration="1231000" />
+      <workItem from="1674522654389" duration="933000" />
+      <workItem from="1674552479582" duration="605000" />
+      <workItem from="1674718061882" duration="603000" />
+      <workItem from="1674783820839" duration="640000" />
+      <workItem from="1676252136210" duration="2998000" />
     </task>
     <servers />
   </component>
