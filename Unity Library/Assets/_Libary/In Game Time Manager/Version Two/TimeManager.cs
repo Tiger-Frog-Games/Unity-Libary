@@ -15,35 +15,25 @@ namespace TigerFrogGames
 
     public class TimeManager : MonoBehaviour
     {
-        private static TimeManager _instance;
-        public static TimeManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new TimeManager();
-                }
-                return _instance;
-            }
-        }
+        public static TimeManager Instance { get; private set; }
 
         #region Variables
 
         /// <summary>
         /// How many secounds in real time is one in game day.
         /// </summary>
-        [SerializeField] private float _dayLength;
+        [field:SerializeField, Header("Time Scale")] public float dayLength { private set; get; } = 60 ;
 
         private float _minLength;
         
-        private TimeSpan _currentTime;
+        public TimeSpan CurrentTime { private set; get;}
         
         [Header("Times of the day")]
 
         [SerializeField] private int startDay;
         [SerializeField] private int startHour;
         [SerializeField] private int startMin;
+        [SerializeField] private int startSec;
         
         
 
@@ -61,7 +51,14 @@ namespace TigerFrogGames
 
         private void Awake()
         {
-            _instance = this;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this);
+                throw new System.Exception("An instance of this singleton already exists.");
+            }
+            Instance = this;
+            
+            
 
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
             
@@ -70,16 +67,11 @@ namespace TigerFrogGames
                 OnTimerReset.OnEvent += ResetTimer;
             }
 
-            _minLength = 1440 / _dayLength   ;
+            changeTimeScale(dayLength);
             
             ResetTimer();
         }
-
-        private void Start()
-        {
-            //dayChange?.RaiseEvent(currentDay_InGame);
-        }
-
+        
         private void OnDestroy()
         {
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
@@ -93,20 +85,17 @@ namespace TigerFrogGames
         private int _lastBroadcastedMin = -1;
         private void Update()
         {
-            _currentTime += TimeSpan.FromMinutes( Time.deltaTime * _minLength  );
+            CurrentTime += TimeSpan.FromMinutes( Time.deltaTime * _minLength  );
 
-            if (_currentTime.Minutes != _lastBroadcastedMin)
-            {
-                OnTimeChange.RaiseEvent(_currentTime);
-                _lastBroadcastedMin = _currentTime.Minutes;
-            }
-
-            //
-            //print($"{_currentTime.Days} - {_currentTime.Hours}:{_currentTime.Minutes}.{_currentTime.Seconds}"
             
-            //print(_currentTime.ToString(@"d\.hh\:mm\:ss"));
+            //You can change this seconds if you have a slower time scale
+            if (CurrentTime.Minutes != _lastBroadcastedMin)
+            {
+                OnTimeChange.RaiseEvent(CurrentTime);
+                _lastBroadcastedMin = CurrentTime.Minutes;
+            }
         }
-
+        
         #endregion
 
         #region Methods
@@ -119,21 +108,43 @@ namespace TigerFrogGames
         
         //reset
         [ContextMenu("Reset Timer")]
-        private void ResetTimer()
+        public void ResetTimer()
         {
-            setTime( startDay, startHour, startMin);
+            setTime(startDay, startHour, startMin, startSec);
         }
 
-        private void setTime(int day,int hour, int minutes)
+        public void setTime(int day,int hour, int minutes, int sec)
         {
-            _currentTime = new TimeSpan(day,hour,minutes,0);
+            CurrentTime = new TimeSpan(day,hour,minutes,sec);
+        }
+
+        /// <summary>
+        /// Changes the length of the day based on how many secounds real time are in a single day. 
+        /// </summary>
+        /// <param name="dayLength"></param>
+        public void changeTimeScale(float dayLengthI)
+        {
+            if(dayLength == 0) return;
+            
+            
+            _minLength = 1440 / dayLengthI ;
         }
         
         #endregion
 
         #region Editor
 
-   
+#if UNITY_EDITOR
+
+        private void OnValidate()
+        {
+            if (dayLength == 0)
+            {
+                Debug.Log("Day length can not be zero! or you will divide by zero");
+            }
+        }
+
+#endif
 
         #endregion
     }

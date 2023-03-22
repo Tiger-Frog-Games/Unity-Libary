@@ -21,6 +21,7 @@ namespace TigerFrogGames
 
         public override void AddStatusEffectInstant(StatusEffectInstant newEffect)
         {
+ 
             if(newEffect.StatToEffect ==  hp)
             {
                 var newHp = Mathf.Clamp(_statBlock.GetStatValue(hp) + newEffect.Value, 0, _statBlock.GetStatValue(hpMax));
