@@ -124,8 +124,7 @@ namespace TigerFrogGames
         /// <param name="dayLength"></param>
         public void changeTimeScale(float dayLengthI)
         {
-            if(dayLength == 0) return;
-            
+            if(dayLengthI == 0) return;
             
             _minLength = 1440 / dayLengthI ;
         }
